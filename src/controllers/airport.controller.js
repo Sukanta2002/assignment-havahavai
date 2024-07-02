@@ -6,7 +6,7 @@ import { ApiResponce } from "../utils/apiResponce.js";
 const getAirportDetails = asyncHandler(async (req, res) => {
   const iata_code = req.params.iata_code;
   if (!iata_code) {
-    throw new ApiError("IATA code is required", 400);
+    throw new ApiError(400, "IATA code is required");
   }
   const query = `
   SELECT
@@ -50,7 +50,7 @@ WHERE
   const { rows } = await client.query(query, [iata_code]);
   // console.log(rows[0]);
   if (rows.length === 0) {
-    throw new ApiError("Airport not found", 404);
+    throw new ApiError(404, "Airport not found");
   }
 
   const airportData = {
