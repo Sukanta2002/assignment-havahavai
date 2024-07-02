@@ -48,7 +48,7 @@ WHERE
   `;
 
   const { rows } = await client.query(query, [iata_code]);
-  console.log(rows[0]);
+  // console.log(rows[0]);
   if (rows.length === 0) {
     throw new ApiError("Airport not found", 404);
   }
