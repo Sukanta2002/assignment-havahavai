@@ -1,23 +1,16 @@
 import { app } from "./app.js";
-import connectDB from "./db/index.js";
+import client from "./db/db.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: "./.env" });
 
+client
+  .connect()
+  .then(() => {
+    console.log("PostgreSQL connected");
 
-
-connectDB()
-    .then(() => {
-
-        app.on("error", () => {
-            console.log(`Some Error occoured when starting the express server`);
-        });
-
-        app.listen(process.env.PORT || 8000, () => {
-            console.log(`The server is listening on potr : ${process.env.PORT}`);
-        });
-
-    })
-    .catch((error) => {
-        console.log("Some Error Occoured in MongoDB !!!", error);
+    app.listen(process.env.PORT, () => {
+      console.log(`Server started on port ${process.env.PORT}`);
     });
+  })
+  .catch((err) => console.error("Connection error", err));

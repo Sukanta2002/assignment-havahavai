@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-
+import client from "../db/db.js";
 import { ApiError } from "../utils/apiError.js";
 
 const errorHandler = (err, req, res, next) => {
@@ -12,7 +11,7 @@ const errorHandler = (err, req, res, next) => {
 
     // assign an appropriate status code
     const statusCode =
-      error.statusCode || error instanceof mongoose.Error ? 400 : 500;
+      error.statusCode || error instanceof Client.Error ? 400 : 500;
 
     // set a message from native Error instance or a custom one
     const message = error.message || "Something went wrong";
