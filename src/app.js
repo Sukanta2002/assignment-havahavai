@@ -15,6 +15,9 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 import airportRoutes from "./routes/airport.routes.js";
 
+app.get("/", (req, res) => {
+  res.send("Assignment Havahavai API 👏");
+});
 app.use("/api/airport", airportRoutes);
 
 app.use(errorHandler);
